@@ -1,10 +1,28 @@
 import React from 'react';
 import {Page} from "@/types";
+import Footer from "@/components/snippets/footer/Footer";
 
-const NormalPage = ({ title, content }: Page) => {
+import styles from './normalpage.module.css';
+import TermElement from "@/components/snippets/term/TermElement";
+
+const NormalPage = ({ title, content, footer }: Page) => {
     return (
-        <div>
+        <div className={styles.container}>
+            {title &&
+                <div className={styles.titleContainer}>
+                    <h4 className={styles.title}>{title}</h4>
+                </div>
+            }
 
+            {content &&
+                <main className={styles.contentContainer}>
+                    {content.map((item, i) => (
+                        <TermElement key={i} element={item} />
+                    ))}
+                </main>
+            }
+
+            <Footer footerElement={footer.footerElement} pageNumber={footer.pageNumber} />
         </div>
     );
 }

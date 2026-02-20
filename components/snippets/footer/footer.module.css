@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+
+    border-top: 1px solid #e2ded5;
+
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 0.9rem;
+    color: #7a7a7a;
+}
+
+.pageNumber {
+    font-weight: bold;
+    color: #555;
+}
+
+.footerText {
+    font-style: italic;
+    text-transform: capitalize;
+}

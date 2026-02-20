@@ -22,6 +22,7 @@ export interface Term {
     term: string,
     note?: string,
     resource?: string,
+    type?: TermType | TermType.NOTE,
 }
 
 export enum TermType {
