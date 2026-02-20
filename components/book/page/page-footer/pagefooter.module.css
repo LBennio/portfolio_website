@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+    height: fit-content;
+}
+
+.footerElement {
+
+}
+
+.footerText {
+
+}
