@@ -1,7 +1,10 @@
+import PageMark from "@/components/snippets/pagemark/PageMark";
+
 export interface Book {
     id: number,
     cover: Page,
     pages?: Page[],
+    marks: PagemarkData[],
 }
 
 export interface Page {
@@ -23,6 +26,13 @@ export interface Term {
     note?: string,
     resource?: string,
     type?: TermType | TermType.NOTE,
+}
+
+export interface PagemarkData {
+    id: number,
+    bookId: number,
+    pageNumber: number,
+    text: string,
 }
 
 export enum TermType {

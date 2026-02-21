@@ -3,7 +3,7 @@
 import React, {useState} from 'react';
 import NormalPage from "@/components/book/page/normal-page/NormalPage";
 import { testPageData } from "@/prisma/model";
-import PageMark from "@/components/snippets/pagemark/PageMark";
+import styles from './books.module.css';
 
 const BooksDashboard = () => {
     const [isPageMarkVisible, setIsPageMarkVisible] = useState(true);
@@ -14,15 +14,13 @@ const BooksDashboard = () => {
 
     return (
         <div>
-            <NormalPage
-                {...testPageData}
-            />
-
-            {isPageMarkVisible && (
-                <>
-                    <PageMark />
-                </>
-            )}
+            <div className={styles.container}>
+                <NormalPage
+                    {...testPageData}
+                    isPageMarkVisible={isPageMarkVisible}
+                    onToggleBookmark={togglePageMarkVisible}
+                />
+            </div>
         </div>
     );
 }

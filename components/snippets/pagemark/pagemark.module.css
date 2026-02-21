@@ -1,9 +1,100 @@
-.container {
-    background-color: crimson;
-    width: 8%;
-    height: 120%;
+:root {
+    /* ribbon */
+    --ribbon-color: #8b1a1a;
+    /* simpler color*/
+    /* --ribbon-color: #d10c0c */;
+
+    --ribbon-gradient-middle-color: #a52424;
+    --ribbon-gradient: linear-gradient(to right, var(--ribbon-color), var(--ribbon-gradient-middle-color), var(--ribbon-color));
+
+    --ribbon-point-size: 95%;
+    --ribbon-pop-len: 8px;
+    --ribbon-pop-color: #6b1212;
+
+    --text-color: #e6c288;
+    --text-indent-dark: rgba(0, 0, 0, 0.4);
+    --text-indent-light: rgba(255, 255, 255, 0.1);
+    --text-pop-color: #b16b02;
+
+    --container-open-height: calc(100% + 25px);
+    --container-closed-height: 120px;
 }
 
-.bookmarkText {
+.container, .closedContainer {
+    position: absolute;
+    top: -5px;
+    width: 35px;
 
+    /* background: var(--ribbon-gradient); */
+    background-color: var(--ribbon-color);
+    cursor: pointer;
+    display: flex;
+
+    padding-top: 60px;
+
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.4);
+
+    justify-content: center;
+    align-items: flex-start;
+
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10;
+
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% var(--ribbon-point-size), 0% 100%);
+}
+
+.container {
+    height: var(--container-open-height); /* 140px; should be standard, but we're extra :3 */
+}
+
+.closedContainer {
+    height: var(--container-closed-height);
+}
+
+.container:hover, .closedContainer:hover {
+    transform: translateY(var(--ribbon-pop-len));
+
+    filter: brightness(1.1);
+}
+
+.container:active, .closedContainer:active {
+    transform: translateY(var(--ribbon-pop-len));
+    background-color: var(--ribbon-pop-color);
+}
+
+.right {
+    right: 10px;
+}
+
+.left {
+    left: 10px;
+}
+.bookmarkText {
+    display: flex;
+
+    color: var(--text-color);
+    margin: 0;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-style: italic;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2.5px;
+    white-space: nowrap;
+
+    text-shadow:
+            -1px -1px 0 var(--text-indent-dark),
+            1px 1px 0 var(--text-indent-light);
+}
+
+.textRight {
+    transform: rotate(90deg)
+    translateY(-2px);
+}
+
+.textLeft {
+    transform: rotate(-90deg)
+    translateY(-2px);
 }
