@@ -50,7 +50,7 @@ const Book = ({ id, cover, pages }: Bookdata) => {
 
             </main>
 
-            <Footer />
+            <Footer footerElement={""} pageNumber={0} />
 
             {
                 activePage.pageNumber < totalPages &&

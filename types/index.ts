@@ -1,4 +1,8 @@
-import PageMark from "@/components/snippets/pagemark/PageMark";
+export interface User {
+    id: string,
+    email: string,
+
+}
 
 export interface Book {
     id: number,

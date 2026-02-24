@@ -1,4 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Book {
+  id        String   @id @default(cuid())
+  title     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cover {
+}
+
+model Page {
+  id     String  @id @default(cuid())
+  bookId String
+  title  String?
+
+  twinId String? @unique
+  page   Page?   @relation(fields: [twinId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  page      Page?
+}
+
+model Pagemark {
+  id     String  @id @default(cuid())
+  number Int
+  note   String?
+}
+
+model Footer {
+  id     String @id @default(cuid())
+  note   String
+  number Int    @default(autoincrement())
+}
+
+model Term {
+  id   String   @id @default(cuid())
+  data String?
+  type TermType @default(NOTE)
+}
+
+enum CoverSide {
+  FRONT
+  BACK
+}
+
+enum TermType {
+  IMAGE
+  DEFINITION
+  NOTE
 }
