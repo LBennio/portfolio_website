@@ -1,5 +1,5 @@
 import React from 'react';
-import {Book as Bookdata} from "@/types";
+import { Book as Bookdata } from "@/types";
 import styles from './book.module.css';
 import Footer from "@/components/snippets/footer/Footer";
 

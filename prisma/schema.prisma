@@ -8,45 +8,85 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
+  id       String  @id @default(cuid())
+  email    String  @unique
+  name     String?
+  surname  String?
+  password String
+
+  books Book[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("users")
 }
 
 model Book {
-  id        String   @id @default(cuid())
-  title     String   @unique
+  id    String @id @default(cuid())
+  title String @unique
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  pages  Page[]
+  covers Cover[]
+
+  pagemarks Pagemark[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("books")
 }
 
 model Cover {
+  id   String    @id @default(cuid())
+  side CoverSide @default(FRONT)
+
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@index([bookId])
+  @@map("covers")
 }
 
 model Page {
-  id     String  @id @default(cuid())
+  id    String  @id @default(cuid())
+  title String?
+
   bookId String
-  title  String?
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 
   twinId String? @unique
-  page   Page?   @relation(fields: [twinId], references: [id])
+  twin   Page?   @relation("PageTwin", fields: [twinId], references: [id])
+  twinOf Page?   @relation("PageTwin")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  page      Page?
+  footer Footer @relation(fields: [footerId], references: [id])
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  pagemarks Pagemark[]
+  footerId  String
 }
 
 model Pagemark {
   id     String  @id @default(cuid())
   number Int
   note   String?
+
+  pageId String
+  page   Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  book   Book?   @relation(fields: [bookId], references: [id])
+  bookId String?
 }
 
 model Footer {
   id     String @id @default(cuid())
   note   String
   number Int    @default(autoincrement())
+  pages  Page[]
 }
 
 model Term {
